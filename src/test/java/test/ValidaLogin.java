@@ -1,6 +1,7 @@
 package test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -55,9 +56,10 @@ public class ValidaLogin {
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 	//	site = "https://preprod2.iobonline.com.br/";
+	//	site = "https://preprod.iobonline.com.br/pages/core/login_old.jsf";
 		site = "https://www.iobonline.com.br/";
-		dadoLogin = "sergior";
-		dadoSenha = "Rosendo";
+	//	dadoLogin = "iob.6429136"; dadoSenha = "​36005618";
+		dadoLogin = "sergior"; dadoSenha = "Rosendo";
 		driver.get(site);
 	}
 	
@@ -110,7 +112,7 @@ public class ValidaLogin {
 //	@Ignore
 	@Test                 
 	public void Teste3_ValidaLogin() throws InterruptedException {
-		
+
 		System.out.println("*** Método 3 - Autenticação ***");
 	//	Modal de autenticação
 		WebElement botaoLogin = driver.findElement(By.id("toolbar")).findElement(By.className("magenta-btn"));
@@ -118,15 +120,15 @@ public class ValidaLogin {
 		Thread.sleep(3000);
 		autentica(dadoLogin, dadoSenha);
 		Thread.sleep(1000);
-		System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
 
 		usuarioLogado = driver.findElement(By.className("welcome")).getText();
+		System.out.println("Conteúdo da class [welcome]: " + usuarioLogado);
+		
+//		assertTrue("Pagina de autenticação não confere!", usuarioLogado != null);
 
-		System.out.println("Autenticação: " + usuarioLogado);
-		
-//		assertTrue("Houve problema no processo de autenticação.", driver.getTitle().contentEquals(titleSite));
-//		assertTrue("Houve problema no processo de autenticação.", driver.getTitle().contentEquals(titleSite));
-		
+		assertNotNull("Página diferente do esperado!", usuarioLogado);
+
+		System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
 		
 //		driver.close();
 	}
