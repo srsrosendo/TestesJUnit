@@ -1,5 +1,5 @@
 #Comentario criado no GITBASH
-target/
-.classpath
-.settings/
-.project
+#target/
+#.classpath
+#.settings/
+#.project
