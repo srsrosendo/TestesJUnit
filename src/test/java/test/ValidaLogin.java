@@ -52,15 +52,14 @@ public class ValidaLogin {
 	public static void setUpBeforeClass() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");	// Local do driver .exe
 		options = new ChromeOptions();
-	//	options.addArguments("--headless"); 	// para ser executado em background
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 	//	site = "https://preprod2.iobonline.com.br/";
 	//	site = "https://preprod.iobonline.com.br/pages/core/login_old.jsf";
 		site = "https://www.iobonline.com.br/";
-	//	dadoLogin = "iob.6429136"; dadoSenha = "​36005618";
 		dadoLogin = "sergior"; dadoSenha = "Rosendo";
 		driver.get(site);
+	//	options.addArguments("--headless"); 	// para ser executado em background
 	}
 	
 	@AfterClass
