@@ -24,7 +24,7 @@ public class ValidaLogin {
 	static ChromeOptions options;
 	static String dadoLogin, dadoSenha, site;
 	static WebElement navegador, login, senha;
-	String usuarioLogado;
+	static String usuarioLogado;
 	
 	public static void sendKeys(WebDriver driver, WebElement element, int timeout, String value) {
 		new WebDriverWait(driver, timeout).until(ExpectedConditions.visibilityOf(element));
@@ -87,7 +87,6 @@ public class ValidaLogin {
 		
 	}
 	
-	
 //	@Ignore
 	@Test
 	public void Teste2_VerificaModal() throws InterruptedException {
@@ -121,49 +120,46 @@ public class ValidaLogin {
 		Thread.sleep(1000);
 
 		usuarioLogado = driver.findElement(By.className("welcome")).getText();
-		System.out.println("Conteúdo da class [welcome]: " + usuarioLogado);
-		
-//		assertTrue("Pagina de autenticação não confere!", usuarioLogado != null);
-
 		assertNotNull("Página diferente do esperado!", usuarioLogado);
 
 		System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
-		
-//		driver.close();
-	}
 
+		WebElement botaoSair = driver.findElement(By.linkText("Sair"));
+		clickOn(driver, botaoSair, 30);
+		
+		Thread.sleep(1500);
+		driver.close();
+	}
 	
-	@Ignore
+//	@Ignore
 	@Test                 
 	public void Teste4_LoginSessaoAtiva() throws InterruptedException {
 		
 		System.out.println("*** Método 4 - Logar com sessão ativa ***");
-		
-	//	Modal de autenticação
-		WebElement botaoLogin = driver.findElement(By.id("toolbar")).findElement(By.className("magenta-btn"));
 
-		if(botaoLogin != null) {
+		try {
+			//	Modal de autenticação
+			WebElement botaoLogin = driver.findElement(By.id("toolbar")).findElement(By.className("magenta-btn"));
 			clickOn(driver, botaoLogin, 30);
 			Thread.sleep(3000);
 			autentica(dadoLogin, dadoSenha);
 			Thread.sleep(1000);
-
+			usuarioLogado = driver.findElement(By.className("welcome")).getText();
+			System.out.println("    ** Método 4 - Não há sessão ativa, usuário autenticado com sucesso!");
+		} catch (Exception e) {
+			// TODO: handle exception
 			WebElement botaoAutenticado = driver.findElement(By.id("error-message")).findElement(By.className("default-btn"));
-			if (botaoAutenticado != null) {
-				clickOn(driver, botaoAutenticado, 5);
-				
-				driver.findElement(By.className("authenticate")).findElement(By.className("default-btn")).click();
-				System.out.println("    ** Método 3 - Finalizando sessão ativa, para logar novamente.");
-				System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
-			} else {
-				System.out.println("    ** Método 3 - Não há sessão ativa para esse usuário. ***");
-				System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
-			}
-		} else {
-			System.out.println("    ** Método 3 - Autenticação efetuada com sucesso. ***");
+			clickOn(driver, botaoAutenticado, 5);
+			
+			driver.findElement(By.className("authenticate")).findElement(By.className("default-btn")).click();
+			System.out.println("    ** Método 4 - Finalizando sessão ativa, para logar novamente.");
+			System.out.println("    ** Método 4 - Autenticação efetuada com sucesso. ***");
+		} finally {
+			WebElement botaoSair = driver.findElement(By.linkText("Sair"));
+			clickOn(driver, botaoSair, 30);
+			Thread.sleep(2000);
+			driver.close();
 		}
-		
-		driver.close();
 	}
 	
 }
