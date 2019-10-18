@@ -44,7 +44,7 @@ public class ValidaLogin {
 		WebElement senha = driver.findElement(By.id("txtPassword"));
 		sendKeys(driver, senha, 5, dadoSenha);
 		
-		WebElement botaoLogin = driver.findElement(By.className("authenticate")).findElement(By.className("default-btn"));
+		WebElement botaoLogin = driver.findElement(By.className("authenticate")).findElement(By.className("send-login"));
 		clickOn(driver, botaoLogin, 5);
 	}
 	
@@ -107,7 +107,7 @@ public class ValidaLogin {
 		
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test                 
 	public void Teste3_ValidaLogin() throws InterruptedException {
 
@@ -128,7 +128,7 @@ public class ValidaLogin {
 		clickOn(driver, botaoSair, 30);
 		
 		Thread.sleep(1500);
-		driver.close();
+	//	driver.close();
 	}
 	
 //	@Ignore
@@ -148,17 +148,20 @@ public class ValidaLogin {
 			System.out.println("    ** Método 4 - Não há sessão ativa, usuário autenticado com sucesso!");
 		} catch (Exception e) {
 			// TODO: handle exception
-			WebElement botaoAutenticado = driver.findElement(By.id("error-message")).findElement(By.className("default-btn"));
-			clickOn(driver, botaoAutenticado, 5);
+			WebElement botaoContinuar = driver.findElement(By.id("error-message")).findElement(By.className("default-btn"));
+			clickOn(driver, botaoContinuar, 5);
 			
-			driver.findElement(By.className("authenticate")).findElement(By.className("default-btn")).click();
+			WebElement botaoEntrar = driver.findElement(By.className("authenticate")).findElement(By.className("default-btn"));
+			clickOn(driver, botaoEntrar, 5);
+			
 			System.out.println("    ** Método 4 - Finalizando sessão ativa, para logar novamente.");
 			System.out.println("    ** Método 4 - Autenticação efetuada com sucesso. ***");
 		} finally {
+			Thread.sleep(1500);
 			WebElement botaoSair = driver.findElement(By.linkText("Sair"));
 			clickOn(driver, botaoSair, 30);
-			Thread.sleep(2000);
-			driver.close();
+			Thread.sleep(1000);
+		//	driver.close();
 		}
 	}
 	
