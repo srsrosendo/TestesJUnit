@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class Exemplos {
+public class Test_0_Exemplos {
 
 	private String stringLocal;
 	

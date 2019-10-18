@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ValidaLogin {
+public class Test_3_ValidaLogin {
 
 	static WebDriver driver;
 	static ChromeOptions options;
