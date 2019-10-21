@@ -37,18 +37,18 @@ public class Test_1_ValidaSite {
 	public static void setUpBeforeClass() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");	// Local do driver .exe
 		options = new ChromeOptions();
+		options.addArguments("--headless"); 	// para ser executado em background
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 	//	site = "https://preprod2.iobonline.com.br/";
 	//	site = "https://preprod.iobonline.com.br/pages/core/login_old.jsf";
 		site = "https://www.iobonline.com.br/";
 		driver.get(site);
-	//	options.addArguments("--headless"); 	// para ser executado em background
 	}
 	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		//	driver.close();
+		driver.close();
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class Test_1_ValidaSite {
 		String titleSite = "IOB Online";
 		
 		assertTrue("Verificar o domínio do Site. Titulo da página difere do esperado.", driver.getTitle().contentEquals(titleSite));
-		System.out.println("*** Método 1 - URL do domínio OK. ***");
+		System.out.println("*** Test_1_Método 1 - URL do domínio OK. ***");
 		
 	}
 	

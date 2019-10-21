@@ -31,25 +31,25 @@ public class Test_2_FecharModal {
 	public static void setUpBeforeClass() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");	// Local do driver .exe
 		options = new ChromeOptions();
+		options.addArguments("--headless"); 	// para ser executado em background
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 	//	site = "https://preprod2.iobonline.com.br/";
 	//	site = "https://preprod.iobonline.com.br/pages/core/login_old.jsf";
 		site = "https://www.iobonline.com.br/";
 		driver.get(site);
-	//	options.addArguments("--headless"); 	// para ser executado em background
 	}
 	
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		//	driver.close();
+		driver.close();
 	}
 
 //	@Ignore
 	@Test
 	public void Teste2_VerificaModal() throws InterruptedException {
 		
-		System.out.println("*** Método 2 - Verificar Modal... ***");
+		System.out.println("*** Test_2_Método 2 - Verificar Modal... ***");
 		Thread.sleep(2500);
 		
 		String mascara = driver.findElement(By.className("mask")).getTagName();
@@ -58,9 +58,9 @@ public class Test_2_FecharModal {
 			WebElement botaoFecharModal = driver.findElement(By.className("close-video"));
 			clickOn(driver, botaoFecharModal, 50);
 			Thread.sleep(1500);
-			System.out.println("    ** Método 2 - Modal fechado com sucesso. ***");
+			System.out.println("    ** Test_2_Método 2 - Modal fechado com sucesso. ***");
 		} else {
-			System.out.println("    ** Método 2 - Não há modal no FrontEnd. ***");
+			System.out.println("    ** Test_2_Método 2 - Não há modal no FrontEnd. ***");
 		}
 		
 	}
