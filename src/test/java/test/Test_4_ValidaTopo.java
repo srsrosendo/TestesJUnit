@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Test_3_ValidaLogin {
+public class Test_4_ValidaTopo {
 
 	static WebDriver driver;
 	static ChromeOptions options;
@@ -53,7 +53,7 @@ public class Test_3_ValidaLogin {
 	public static void setUpBeforeClass() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:/drivers/chromedriver.exe");	// Local do driver .exe
 		options = new ChromeOptions();
-	//	options.addArguments("--headless"); 	// para ser executado em background
+		options.addArguments("--headless"); 	// para ser executado em background
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 	//	site = "https://preprod2.iobonline.com.br/";
@@ -99,7 +99,7 @@ public class Test_3_ValidaLogin {
 		try {
 			WebElement botaoFecharModal = driver.findElement(By.className("close-video"));
 			clickOn(driver, botaoFecharModal, 50);
-			Thread.sleep(1500);
+			Thread.sleep(2500);
 			System.out.println("    ** Test_3_Método 2 - Modal fechado com sucesso. ***");
 			
 		} catch (Exception e) {
@@ -120,7 +120,9 @@ public class Test_3_ValidaLogin {
 
 		try {
 			//	Modal de autenticação
+		//	Thread.sleep(2000);
 			WebElement botaoLogin = driver.findElement(By.id("toolbar")).findElement(By.className("magenta-btn"));
+		//	WebElement botaoLogin = driver.findElement(By.className("magenta-btn"));
 			clickOn(driver, botaoLogin, 30);
 			Thread.sleep(3000);
 			autentica(dadoLogin, dadoSenha);
@@ -129,6 +131,7 @@ public class Test_3_ValidaLogin {
 			System.out.println("    ** Test_3_Método 3 - Não há sessão ativa, usuário autenticado com sucesso!");
 		} catch (Exception e) {
 			// TODO: handle exception
+			Thread.sleep(1500);
 			WebElement botaoContinuar = driver.findElement(By.id("error-message")).findElement(By.className("default-btn"));
 			clickOn(driver, botaoContinuar, 5);
 			
@@ -138,11 +141,11 @@ public class Test_3_ValidaLogin {
 			System.out.println("    ** Test_3_Método 3 - Finalizando sessão ativa, para logar novamente.");
 			System.out.println("    ** Test_3_Método 3 - Autenticação efetuada com sucesso. ***");
 		} finally {
-			Thread.sleep(1000);
-			WebElement botaoSair = driver.findElement(By.linkText("Sair"));
-			clickOn(driver, botaoSair, 30);
-			Thread.sleep(1000);
-			driver.close();
+		//	Thread.sleep(2000);
+		//	WebElement botaoSair = driver.findElement(By.linkText("Sair"));
+		//	clickOn(driver, botaoSair, 30);
+		//	Thread.sleep(1000);
+		//	driver.close();
 		}
 	}
 	

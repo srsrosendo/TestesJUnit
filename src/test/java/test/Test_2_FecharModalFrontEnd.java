@@ -1,5 +1,7 @@
 package test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -15,12 +17,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Test_2_FecharModal {
+public class Test_2_FecharModalFrontEnd {
 
 	static WebDriver driver;
 	static ChromeOptions options;
 	static String site;
 	static WebElement navegador;
+	static String ErrorTeste = "SiteTeste";
 	
 	public static void clickOn(WebDriver driver, WebElement element, int timeout) {
 		new WebDriverWait(driver, timeout).until(ExpectedConditions.elementToBeClickable(element));
@@ -37,6 +40,7 @@ public class Test_2_FecharModal {
 	//	site = "https://preprod2.iobonline.com.br/";
 	//	site = "https://preprod.iobonline.com.br/pages/core/login_old.jsf";
 		site = "https://www.iobonline.com.br/";
+	//	site = "https://www.iob.com.br/";
 		driver.get(site);
 	}
 	
@@ -49,18 +53,17 @@ public class Test_2_FecharModal {
 	@Test
 	public void Teste2_VerificaModal() throws InterruptedException {
 		
-		System.out.println("*** Test_2_Método 2 - Verificar Modal... ***");
-		Thread.sleep(2500);
+		System.out.println("*** Test_2_Método 1 - Verificar Modal... ***");
 		
-		String mascara = driver.findElement(By.className("mask")).getTagName();
-		if(mascara != null) {
-			//	Modal FrontEnd
+		try {
 			WebElement botaoFecharModal = driver.findElement(By.className("close-video"));
 			clickOn(driver, botaoFecharModal, 50);
-			Thread.sleep(1500);
-			System.out.println("    ** Test_2_Método 2 - Modal fechado com sucesso. ***");
-		} else {
-			System.out.println("    ** Test_2_Método 2 - Não há modal no FrontEnd. ***");
+			System.out.println("    ** Test_2_Método 1 - Modal fechado com sucesso. ***");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("    ** Test_2_Método 1 - Não há modal no FrontEnd. ***");
+			assertTrue("    ** Test_2_Método 1 - Não há modal no FrontEnd. ***", driver.getTitle().contentEquals(ErrorTeste));
 		}
 		
 	}
